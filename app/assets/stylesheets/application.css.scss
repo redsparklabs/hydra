@@ -1,0 +1,48 @@
+// CUSTOMIZE BOOTSTRAP VARIABLES
+$brand-primary: #16c9a0;
+
+@import "redactor-rails";
+@import "bootstrap";
+
+body{
+	padding: 70px 0 6em 0;
+}
+
+h1, h2{ //h3, h4, h5, h6{
+	font-family: 'Exo', sans-serif;
+	font-weight: 800;
+}
+
+.right {
+	background: transparent;
+	float: right;
+	margin-top: -19px;
+	border: 1px solid #FFF;
+	color: white;
+
+	&:hover{
+		border: 1px solid #333;
+		background: transparent;
+		color: #333;
+	}
+}
+
+.redactor_editor{
+	min-height: 300px;
+	p, ul, ol, blockquote, span{line-height: 1.5em;}
+}
+
+.new-btn{
+	margin-top: 13px;
+}
+
+.avatar{
+	background: url(avatar.gif) no-repeat;
+	background-size: cover;
+	border: 1px solid $brand-primary;
+	border-radius: 75px;
+	overflow: hidden;
+	margin: 0 auto 2em auto;
+	width: 150px;
+	height: 150px;
+}

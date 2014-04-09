@@ -1,0 +1,70 @@
+<%= form_for(@story) do |f| %>
+  <% if @story.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@story.errors.count, "error") %> prohibited this story from being saved:</h2>
+
+      <ul>
+      <% @story.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="row">
+    <div class="col-lg-6">
+      <%= f.hidden_field :user_id %>
+
+      <div class="form-group">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %><br />
+        <%= f.text_area :description, :class => "form-control" %>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <%= f.label :impact %><br />
+        <%= f.number_field :impact, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :effort %><br />
+        <%= f.number_field :effort, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :product_id %><br />
+        <%= collection_select(:story, :product_id, Product.order('id ASC'), :id, :name, {:prompt => "Select Product", :include_blank => false}, :class => "form-control")%>
+      </div>
+      <div class="form-group">
+        <%= f.label :persona_id %><br />
+        <%= collection_select(:story, :persona_id, Persona.order('id ASC'), :id, :name, {:prompt => "Select Persona", :include_blank => false}, :class => "form-control")%>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="checkbox">
+            <%= f.check_box :completed %>
+            <%= f.label :completed, "Mark As Complete" %>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-lg-6">
+          <%= f.submit "Save", :class => "btn btn-primary btn-block" %>
+        </div>
+        <div class="col-lg-6">
+          <%= link_to 'Cancel', stories_path, :class => "btn btn-danger btn-block" %>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-lg-12">
+          <%= link_to 'Delete User Story', @story, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-block" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<% end %>

@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-lg-10">
+    <h1>Products</h1>
+  </div>
+  <div class="col-lg-2">
+    <%= link_to 'New Product', new_product_path, :class => "btn btn-default btn-lg btn-block new-btn" %>
+  </div>
+</div>
+<hr />
+<% if can? :update, Product %>
+<div class="row">
+  <% @products.each do |product| %>
+    <div class="col-lg-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= product.name %></h3>
+          <%= link_to edit_product_path(product) do %>
+            <div class="btn btn-primary btn-xs right">
+              <span class="glyphicon glyphicon-pencil"></span> Edit
+            </div>
+          <% end %>
+        </div>
+        <div class="panel-body">
+          <%= product.description.html_safe %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+  <br />
+<% else %>
+  <p>Access denied.</p>
+<% end %>

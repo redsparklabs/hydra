@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-lg-10">
+    <h1>Personas</h1>
+  </div>
+  <div class="col-lg-2">
+    <%= link_to 'New Persona', new_persona_path, :class => "btn btn-default btn-lg btn-block new-btn" %>
+  </div>
+</div>
+<hr />
+<% if can? :manage, Persona %>
+  <div class="row">
+      <% @personas.each do |persona| %>
+        <div class="col-lg-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <%= persona.name %>
+              </h3>
+              <%= link_to edit_persona_path(persona) do %>
+                <div class="btn btn-primary btn-xs right">
+                  <span class="glyphicon glyphicon-pencil"></span> Edit
+                </div>
+              <% end %>
+            </div>  
+            <div class="panel-body">
+              <% if persona.avatar? %>
+                <div class="avatar">
+                  <%= image_tag persona.avatar.thumb %>
+                </div> 
+                <div class="clearfix"></div>
+              <% end %>
+              <%= persona.description.html_safe %>
+            </div>
+            <div class="panel-footer"><small>
+             <strong><%= persona.product ? persona.product.name : '' %> | </strong>Created By: <strong> <%= persona.user ? persona.user.name : '' %></strong> | <%= link_to 'Delete', persona, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </small></div>
+          </div>
+        </div>
+      <% end %>
+      
+  </div>
+<% else %>
+  <p>Access denied</p>
+<% end %>
